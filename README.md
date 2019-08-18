@@ -13,6 +13,5 @@ Prototype of interactive map to help East Aldine residents coordinate events
   + location
   + keywords and etc.
   
-  2. Embed map on an external site 
-  
+2. Embed map on an external site 
   + https://xoeksoxo.wixsite.com/east-aldine-harvey
