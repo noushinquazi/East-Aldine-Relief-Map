@@ -27,6 +27,7 @@ new Vue({
 	},
 	methods: {
 		listenEventLoc(e) {
+			console.log("wix test");
 			if (confirm("add event? click on desired location")) {
 				this.$refs.map.mapObject.on("click", this.trackEventLoc);
 			}
@@ -34,10 +35,9 @@ new Vue({
 		trackEventLoc(e) {
 			console.log(e)
 			if (confirm("creat event at this location? "+e.latlng.lat+", "+e.latlng.lng)) {
-				this.events.push({info: "new event", loc: e.latlng})							
+				this.events.push({info: "new event", loc: e.latlng});							
 			}
-			this.$refs.map.mapObject.off("click")
-
+			this.$refs.map.mapObject.off("click");
 		}
 	}
 });
