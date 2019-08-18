@@ -1,0 +1,11 @@
+html, body, #app {
+  height: 100%;
+  margin: 0;
+}
+
+.custom-control {
+  background: #fff;
+  padding: 0 0.5em;
+  border: 1px solid #aaa;
+  border-radius: 0.1em;
+}

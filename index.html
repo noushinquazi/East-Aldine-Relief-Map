@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title>Leaflet example</title>
+		<!-- include leaflet css and javascript -->
+		<link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+		<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet-src.js" crossorigin=""></script>
+		<!-- Vue.js and Vue2Leaflet-->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue2-leaflet@2.2.1/dist/vue2-leaflet.min.js"></script>
+		<!-- Various plugins -->
+		<!-- include our own css -->
+		<link rel="stylesheet" href="leaflet-example.css" />
+		<!-- we include the javascript at the bottom, see below -->
+	</head>
+	<body>
+		<div id="app">
+			<!-- Leaflet map -->
+			<l-map ref="map" :zoom="zoom" :center="center">
+				<l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+				<!-- List of events -->
+				<event-pin 
+				  v-for="e in events"
+				  v-bind:info="e.info"
+				  v-bind:loc="e.loc"
+				  v-bind:key="e.info"
+				></event-pin>
+				<l-control class="custom-control"><p @click="listenEventLoc">Add event</p></l-control>
+			</l-map>
+		</div>
+		<script src="leaflet-example.js"></script>
+	</body>
+</html>
