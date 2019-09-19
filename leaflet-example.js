@@ -60,6 +60,8 @@ new Vue({
 			// var url = "garbage"
 			var url = "https://raw.githubusercontent.com/noushinquazi/East-Aldine-Relief-Map/map_branch/mock_data.json"
 			fetch(url).then(response =>
+				// response.json().then(json => json["events"].map(event => console.log(event["loc"])))
+
 				response.json().then(json => json["events"].map(event => this.events.push({info:event["info"], loc: [event["loc"][0], event["loc"][1]]})))
 			, response => console.log("error loading json. Response received: ", response));
 			
