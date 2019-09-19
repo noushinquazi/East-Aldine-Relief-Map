@@ -31,11 +31,7 @@ new Vue({
 		center: L.latLng(47.413220, -1.219482),
 		url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
 		attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-		events: [
-			// {info: "event simran", loc: L.latLng(47.413820, -1.219582)},
-			// {info: "event 2", loc: L.latLng(47.414120, -1.219382)},
-			// {info: "event 3", loc: L.latLng(47.413220, -1.219482)}
-		],
+		events: [],		],
 		newEventname: "New event"
 	},
 	mounted: function() {this.fetch_data()},
@@ -65,14 +61,12 @@ new Vue({
 		},
 		fetch_data() {
 			//load mock data
-			var url = "https://gist.githubusercontent.com/stevenkuipers/1c0284ce4bb8a25a634613c37b60a333/raw/5de5c6d77ef3879474bd7e9a0dce70d032c2ca17/placeholder.json"
-			fetch(url).then(function(response) {
-				response.json().then(function(json) {
-					console.log("recevied json", json)
-
-				});
-
-			}, response => console.log("error loading json", response));
+			// var url = "garbage"
+			var url = "https://raw.githubusercontent.com/noushinquazi/East-Aldine-Relief-Map/map_branch/mock_data.json"
+			fetch(url).then(response =>
+				response.json().then(json => json["events"].map(event => this.events.push({info:event["info"], loc: [event["loc"][0], event["loc"][1]]})))
+			, response => console.log("error loading json. Response received: ", response));
+			
 		}
 	}
 });
