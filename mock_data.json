@@ -1,7 +1,4 @@
 {"events":[{"info": "event simran", loc: L.latLng(47.413820, -1.219582)},
-		{"info": "event 2", loc: L.latLng(47.414120, -1.219382)},
-		{"info": "event 3", loc: L.latLng(47.413220, -1.219482)}]
-	
-
-
+		{"info": "event 2", "loc": [47.414120, -1.219382]},
+		{"info": "event 3", "loc": [47.413220, -1.219482]}
 }
