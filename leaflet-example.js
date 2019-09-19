@@ -14,10 +14,6 @@ Vue.component('event-pin', {
 using address or clicking or st else to create event
 what fields do we want when creating -- loc, date + time, about. (who else is going)
 */
-
-//on startup -- request all the data from backend -- component mounting lifecycle --(for run on startup)
-
-//mock get data function - function to request something from backend - how do and where put
 //data points in east aldine
 // set default location and zoom
 
@@ -27,11 +23,11 @@ new Vue({
 	el: '#app',
 	components: { LMap, LTileLayer, LControl },
 	data:  {
-		zoom:13,
-		center: L.latLng(47.413220, -1.219482),
+		zoom:14,
+		center: L.latLng(29.9276387, -455.333089),
 		url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
 		attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-		events: [],		],
+		events: [],		
 		newEventname: "New event"
 	},
 	mounted: function() {this.fetch_data()},
