@@ -8,8 +8,6 @@ Vue.component('event-pin', {
 	template: '<l-marker :lat-lng="loc"><l-popup>{{info}}</l-popup></l-marker>'}
 );
 
-// Load events from DB - the data str
-// adding event enter name -- should it be a form with details or should they just enter it immediately
 /*
 using address or clicking or st else to create event
 what fields do we want when creating -- loc, date + time, about. (who else is going)
@@ -17,6 +15,11 @@ what fields do we want when creating -- loc, date + time, about. (who else is go
 //data points in east aldine
 // set default location and zoom
 
+
+//Display other info in popup
+
+//Form to input 
+//
 
 // App instance
 new Vue({
@@ -32,8 +35,9 @@ new Vue({
 	},
 	mounted: function() {this.fetch_data()},
 	methods: {
+
+
 		listenEventLoc(e) {
-			console.log("wix test");
 			var newEventname = prompt("Please enter event name", "New event")
 			if (newEventname != null) {
 				this.newEventname = newEventname
@@ -47,25 +51,50 @@ new Vue({
 		trackEventLoc(e) {
 			console.log(e)
 			if (confirm("create event at this location? "+e.latlng.lat+", "+e.latlng.lng)) {
-				//check that event isnt a duplicate
+				//TODO check that event isnt a duplicate
 				this.events.push({info: this.newEventname, loc: e.latlng});							
 			}
+			var latitude = e.latlng.lat;
+			var longitude = e.latlng.lng;
+			var payload = {
+			  'lat': latitude,
+			  'long': longitude
+			};
+			var loc_form = document.createElement('form');
+			loc_form.style.visibility = 'hidden'; // no user interaction is necessary
+			loc_form.method = 'GET'; // forms by default use GET query strings
+			loc_form.action = 'form.html';
+			console.log(payload);
+			console.log(Object.keys(payload));
+			Object.keys(payload).forEach(function(key) {
+				var input = document.createElement('input');
+			  input.name = key;
+			  input.value = payload[key];
+			  loc_form.appendChild(input); // add key/value pair to form
+			})
+
+			document.body.appendChild(loc_form); // forms cannot be submitted outside of body
+			console.log(document.body);
+			loc_form.submit(); // send the payload and navigate
+
+
 			this.$refs.map.mapObject.off("click");
 			this.newEventname = "New Event"
 
-			//add to database of events
+			//TODO get the post params and pre - fill in the form fields.
 		},
 		fetch_data() {
 			//load mock data
 			// var url = "garbage"
 			var url = "https://raw.githubusercontent.com/noushinquazi/East-Aldine-Relief-Map/map_branch/mock_data.json"
 			fetch(url).then(response =>
-				// response.json().then(json => json["events"].map(event => console.log(event["loc"])))
-
-				response.json().then(json => json["events"].map(event => this.events.push({info:event["info"], loc: [event["loc"][0], event["loc"][1]]})))
+				response.json().then(
+					json => json["events"].map(
+						event => this.events.push({info:event["info"], loc: [event["loc"][0], event["loc"][1]]})))
 			, response => console.log("error loading json. Response received: ", response));
 			console.log(this.events)	
 		}
+
 	}
 });
 
